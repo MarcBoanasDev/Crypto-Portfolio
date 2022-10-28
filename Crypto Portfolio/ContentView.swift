@@ -8,19 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    private var coinListVM = CoinListViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            CoinListView()
+                .environmentObject(coinListVM)
+                .tabItem {
+                    Image(systemName: "bitcoinsign.circle")
+                    Text("Coins")
+                }
+            Text("Hello")
+                .tabItem {
+                    Image(systemName: "bitcoinsign.square.fill")
+                    Text("Portfolio")
+                }
         }
-        .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

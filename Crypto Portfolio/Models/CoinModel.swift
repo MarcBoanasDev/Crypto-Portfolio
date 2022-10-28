@@ -52,7 +52,64 @@ import Foundation
  
  */
 
-struct CoinModel: Identifiable, Codable {
-    
-    
+struct Person: Codable {
+    let name: String
+    let age: Int
 }
+
+struct CoinModel: Identifiable, Codable {
+    let id, symbol, name: String
+    let image: String
+    let currentPrice: Double
+    let marketCap, marketCapRank, fullyDilutedValuation: Double?
+    let totalVolume, high24H, low24H: Double?
+    let priceChange24H: Double?
+    let priceChangePercentage24H: Double?
+    let marketCapChange24H: Double?
+    let marketCapChangePercentage24H: Double?
+    let circulatingSupply, totalSupply, maxSupply, ath: Double?
+    let athChangePercentage: Double?
+    let athDate: String?
+    let atl, atlChangePercentage: Double?
+    let atlDate: String?
+    let lastUpdated: String?
+    let sparklineIn7D: SparklineIn7D?
+    let priceChangePercentage24HInCurrency: Double?
+    //let currentHoldings: Double?
+    
+    var rank: Int {
+        Int(self.marketCapRank ?? 0)
+    }
+}
+
+//struct SparklineIn7D: Codable {
+//    let price: [Double]?
+//}
+
+import Foundation
+
+// MARK: - CoinModelElement
+struct CoinModelElement: Codable {
+    let name: String
+}
+
+// MARK: - Roi
+struct Roi: Codable {
+    let times: Double
+    let currency: Currency
+    let percentage: Double
+}
+
+enum Currency: String, Codable {
+    case btc = "btc"
+    case eth = "eth"
+    case usd = "usd"
+}
+
+// MARK: - SparklineIn7D
+struct SparklineIn7D: Codable {
+    let price: [Double]
+}
+
+//typealias CoinModel = [CoinModelElement]
+
